@@ -63,7 +63,7 @@ RUN apk --no-cache add --virtual buildDeps git cmake build-base openssl-dev c-ar
       WITH_TLS_PSK=no \
       WITH_WEBSOCKETS=yes \
     install && \
-    git clone https://github.com/vankxr/mosquitto-auth-plug && \
+    git clone https://github.com/PerryWu/mosquitto-auth-plug && \
     cd mosquitto-auth-plug && \
     cp config.mk.in config.mk && \
     sed -i "s/BACKEND_CDB ?= no/BACKEND_CDB ?= no/" config.mk && \
