@@ -13,8 +13,11 @@ services:
                 build: .
                 volumes:
                 - ${PWD}/auth-plugin.conf:/etc/mosquitto.d/auth-plugin.conf
+                - ${PWD}/mosquitto.conf:/etc/mosquitto/mosquitto.conf
+                - ${PWD}/cert:/cert/
                 ports:
                 - "1883:1883"
+                - "8883:8883"
                 - "9883:9883"
                 environment:
                 - DOMAIN=example.local
