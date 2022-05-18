@@ -3,18 +3,19 @@ version: '2'
 services:
         redis:
                 image: redis:5.0.4-alpine
+                restart: always
                 volumes:
-                - ${PWD}/tmp/data:/data
+                - /home/rd/docker-mosquitto/tmp/data:/data
                 ports:
                 - "6379:6379"
                 container_name: "redis-mosq"
-
         mosquitto:
                 build: .
+                restart: always
                 volumes:
-                - ${PWD}/auth-plugin.conf:/etc/mosquitto.d/auth-plugin.conf
-                - ${PWD}/mosquitto.conf:/etc/mosquitto/mosquitto.conf
-                - ${PWD}/cert:/cert/
+                - /home/rd/docker-mosquitto/auth-plugin.conf:/etc/mosquitto.d/auth-plugin.conf
+                - /home/rd/docker-mosquitto/mosquitto.conf:/etc/mosquitto/mosquitto.conf
+                - /home/rd/docker-mosquitto/cert:/cert/
                 ports:
                 - "1883:1883"
                 - "8883:8883"
@@ -26,4 +27,8 @@ services:
                 - redis
                 labels:
                 - "local.example.description=Mosquitto v1.6.4 MQTT server"
-
+                logging:
+                  driver: "json-file"
+                  options:
+                    max-file: "10"
+                    max-size: "100m"
