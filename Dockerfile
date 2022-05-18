@@ -85,7 +85,7 @@ RUN apk --no-cache add --virtual buildDeps git cmake build-base openssl-dev c-ar
     rm -rf libwebsockets && \
     apk del buildDeps && rm -rf /var/cache/apk/*
 
-ADD mosquitto.conf /etc/mosquitto/mosquitto.conf
+ADD ./configs/mosquitto.conf /etc/mosquitto/mosquitto.conf
 
 ENTRYPOINT ["/run.sh"]
 CMD ["mosquitto"]
